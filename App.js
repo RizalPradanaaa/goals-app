@@ -7,6 +7,7 @@ import {
   TextInput,
   Button,
   ScrollView,
+  FlatList,
 } from "react-native";
 
 export default function App() {
@@ -28,13 +29,14 @@ export default function App() {
         />
         <Button title="Add Goal" onPress={() => addGoals(goalInput)} />
       </View>
-      <ScrollView style={styles.listGoals}>
-        {listGoals.map((goal) => (
-          <View style={styles.goalItem}>
-            <Text>{goal}</Text>
-          </View>
-        ))}
-      </ScrollView>
+      <View style={styles.listGoals}>
+        <FlatList
+          data={listGoals}
+          renderItem={(itemData) => (
+            <Text style={styles.goalItem}>{itemData.item}</Text>
+          )}
+        />
+      </View>
     </View>
   );
 }
@@ -49,6 +51,7 @@ const styles = StyleSheet.create({
   inputGoal: {
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
   },
   TextInput: {
     width: "70%",
